@@ -1,10 +1,12 @@
 import { expect } from 'chai';
 import { TestBuildingBlocks } from '../../../src/infra/utilities/testBuildingBlock';
 import { TestLogger } from '../../../src/infra/loggers/test-logger';
+import { HomePage } from '../../../src/pages/TransactionConnectPages/homePage/home.page';
 import { IncriptionPage } from '../../../src/pages/TransactionConnectPages/transactionConnect/incription.page';
 import { BaseTestData } from "../../../src/infra/models/base-test-data";
 import { TransactionConnectTestBuildingBlocks } from '../../../src/infra/utilities/test-BuildingBlock';
 
+let homePage = new HomePage();
 let incriptionPage = new IncriptionPage();
 let logger: TestLogger;
 let testIndex = 0;
@@ -35,10 +37,16 @@ describe('Transaction Connect FRONT-END CHALLENGE', () => {
         const compatibleTitle = 'Your bank is compatible';
         const purchasesType = 'Automatically';
         const identification = '1234' + randomNum;
+        TestBuildingBlocks.addStepAndExecute(`Verfy that home page is displaying`, () => {
+            expect(homePage.isHomePageLoaded()).to.eq(true, 'Home page was not displaying');
+        });
+        TestBuildingBlocks.addStepAndExecute(`Click on Join the Program button`, () => {
+            homePage.clickOnJoinProgramButton();
+            expect(incriptionPage.isPageTitleExistingDisplaying()).to.eq(true, 'Registration page title was not displaying');
+        });
         TestBuildingBlocks.addStepAndExecute(`Verfy that Transaction Connect registration page is displaying`, () => {
-            browser.navigateTo("https://tcmall-test.transactionconnect.com/inscription/creation-identifiant");
             const pageURL = browser.getUrl();
-            expect(pageURL).to.contain('creation-identifiant', 'Home page was not displaying');
+            expect(pageURL).to.contain('creation-identifiant', `URL not found as ${pageURL}`);
         });
         TestBuildingBlocks.addStepAndExecute(`Create your identification with following fields`, () => {
             TestBuildingBlocks.addStepAndExecute(`Enter the user First name as ${firstName}`, () => {

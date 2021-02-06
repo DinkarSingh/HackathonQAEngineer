@@ -4,11 +4,6 @@ import { BasePage } from '../base-Page';
 
 export class IncriptionPage extends BasePage {
 
-    constructor() {
-        super();
-        this.relativeUrl = '/inscription/creation-identifiant';
-    }
-
     private get pageTitle() { return $('.sc-iUuytg  h1') }
 
     private get fname() { return $('#firstName') }
@@ -54,7 +49,6 @@ export class IncriptionPage extends BasePage {
     private get validateButton() { return $('[data-cy="bank_credentials_validate_btn"]') }
 
     private get synochronizationTitle() { return $('#rcDialogTitle0') }
-
 
     /**
      * Transaction Connect registration page existing or not
@@ -151,6 +145,7 @@ export class IncriptionPage extends BasePage {
      * Unlock offers title text
      */
     public getUnlockOffersText(): string {
+        browser.pause(3000);
         waitUntil(() => this.unlockOfferTitle.isExisting(), Timeouts.FORTY_SECONDS, 'Unlock offers title was not displaying');
         return this.unlockOfferTitle.getText().trim();
     }
