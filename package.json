@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "TransactionConnect": "ENV=preprod wdio ./wdio.conf.js --spec ./test/specs/Core/transactionConnect.spec.ts",
+    "TransactionConnectHeadless": "cross-env ENV=preprod HEADLESS=true wdio wdio.conf.js --spec ./test/specs/Core/transactionConnect.spec.ts",
     "report": "allure generate allure-results/ --clean && allure open"
   },
   "keywords": [],
