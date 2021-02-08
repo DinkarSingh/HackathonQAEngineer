@@ -52,13 +52,23 @@ export class IncriptionPage extends BasePage {
 
     private get synochronizationTitle() { return $('#rcDialogTitle0') }
 
+    private get synchonizationProcess() { return $('.ant-modal-title') }
+
+    private get inputPassword() { return $('[data-cy="create_password_input"]') }
+
+    private get confirmPassword() { return $('[data-cy="confirm_password_input"]') }
+
+    private get passwordValidationBtn() { return $('[data-cy="password_validate_btn"]') }
+
+    private get claimBtn() { return $('[data-cy="my_activities_claim_btn"]') }
+
     /**
      * Transaction Connect registration page existing or not
      */
     public isPageTitleExistingDisplaying(): boolean {
         waitUntil(() => this.pageTitle.isExisting(), Timeouts.FORTY_SECONDS, 'Transaction Connect registration page was not displaying');
         const title = this.pageTitle.getText();
-        if(title !== null){
+        if (title !== null) {
             return true;
         }
     }
@@ -124,7 +134,7 @@ export class IncriptionPage extends BasePage {
     public isPurchasesTitleTextExisting(): boolean {
         waitUntil(() => this.purchasesTitle.isExisting(), Timeouts.FORTY_SECONDS, 'Purchases title was not displaying');
         const title = this.purchasesTitle.getText().trim();
-        if(title !== null){
+        if (title !== null) {
             return true
         }
     }
@@ -157,7 +167,7 @@ export class IncriptionPage extends BasePage {
         browser.pause(3000);
         waitUntil(() => this.unlockOfferTitle.isExisting(), Timeouts.FORTY_SECONDS, 'Unlock offers title was not displaying');
         const title = this.unlockOfferTitle.getText().trim();
-        if(title !== null){
+        if (title !== null) {
             return true;
         }
     }
@@ -209,7 +219,7 @@ export class IncriptionPage extends BasePage {
     public isCompatibleTitleTextExisting(): boolean {
         waitUntil(() => this.compatibleTitle.isExisting(), Timeouts.FORTY_SECONDS, 'Compatible title was not displaying');
         const title = this.compatibleTitle.getText().trim();
-        if(title !== null){
+        if (title !== null) {
             return true;
         }
     }
@@ -303,7 +313,7 @@ export class IncriptionPage extends BasePage {
         waitUntil(() => this.authoriseCheckboxs[0].isExisting(), Timeouts.FORTY_SECONDS, 'Authorise check boxs was not displaying');
         this.authoriseCheckboxs[0].click();
         this.authoriseCheckboxs[1].click();
-        this.authoriseCheckboxs[2].click();
+        //this.authoriseCheckboxs[2].click();
     }
 
     /**
@@ -319,5 +329,36 @@ export class IncriptionPage extends BasePage {
      */
     public isSynchronizationProcessTitleExisting(): boolean {
         return waitUntil(() => this.synochronizationTitle.isExisting(), Timeouts.FORTY_SECONDS, 'Synchronization processs was not displaying');
+    }
+
+    public isSynchronizePorcessExisting(): boolean {
+        return this.synchonizationProcess.isExisting();
+    }
+
+    public isSynchronizationLoaded(): boolean {
+        return !this.isSynchronizePorcessExisting();
+    }
+
+    public waitTillTablePasswordTextBoxEnable(): boolean {
+        return waitUntil(() => this.isSynchronizationLoaded(), Timeouts.TEN_SECONDS, 'Synochonization process is visible');
+    }
+
+    public enterUserPassword(pwd: string) {
+        waitUntil(() => this.inputPassword.isExisting(), Timeouts.FORTY_SECONDS, 'User Password text box was not displaying');
+        this.inputPassword.setValue(pwd);
+    }
+
+    public reEnterUserPassword(pwd: string) {
+        waitUntil(() => this.confirmPassword.isExisting(), Timeouts.FORTY_SECONDS, 'User reenter Password text box was not displaying');
+        this.confirmPassword.setValue(pwd);
+    }
+
+    public clickOnPassowordButton() {
+        waitUntil(() => this.passwordValidationBtn.isExisting(), Timeouts.FORTY_SECONDS, 'Button was not displaying');
+        this.passwordValidationBtn.click();
+    }
+
+    public isClaimButtonExisting(): boolean {
+        return waitUntil(() => this.claimBtn.isExisting(), Timeouts.FORTY_SECONDS, 'User claim button was not displaying');
     }
 }

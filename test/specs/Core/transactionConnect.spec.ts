@@ -107,7 +107,19 @@ describe('Transaction Connect FRONT-END CHALLENGE', () => {
             });
         });
         TestBuildingBlocks.addStepAndExecute(`Verify that Synchronization processing title is displaying`, () => {
-            expect(incriptionPage.isSynchronizationProcessTitleExisting()).to.equal(true, `Synchronization processing title was not displaying`);
+            expect(incriptionPage.waitTillTablePasswordTextBoxEnable()).to.equal(true, `Synchronization processing title was not displaying`);
+        });
+        TestBuildingBlocks.addStepAndExecute(`Enter the user password`, () => {
+            incriptionPage.enterUserPassword('01Dinkar_Singh');
+        });
+        TestBuildingBlocks.addStepAndExecute(`Enter the confirmed user password`, () => {
+            incriptionPage.reEnterUserPassword('01Dinkar_Singh');
+        });
+        TestBuildingBlocks.addStepAndExecute(`Click on client space button`, () => {
+            incriptionPage.clickOnPassowordButton();
+        });
+        TestBuildingBlocks.addStepAndExecute(`Verify that user account page displaying`, () => {
+            expect(incriptionPage.isClaimButtonExisting()).to.equal(true, `User claim account button was not displaying`);
         });
     });
 });
