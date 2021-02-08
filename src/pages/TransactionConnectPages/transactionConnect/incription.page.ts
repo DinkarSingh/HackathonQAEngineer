@@ -26,7 +26,9 @@ export class IncriptionPage extends BasePage {
 
     private get organizationButton() { return $('.ant-select-selection__placeholder') }
 
-    private get organizationlist() { return $$('.ant-select-dropdown-placement-bottomLeft ul li') }
+    private get inputTextBox() { return $('.ant-select-search--inline input') }
+
+    private get dropdowns() { return $$('.ant-select-dropdown-placement-bottomLeft ul li') }
 
     private get compatibleTitle() { return $('.sc-iUuytg h1') }
 
@@ -168,15 +170,19 @@ export class IncriptionPage extends BasePage {
     public selectOrganizationType(option: string) {
         waitUntil(() => this.organizationButton.isExisting(), Timeouts.FORTY_SECONDS, 'Organization button was not displaying');
         this.organizationButton.click();
-        const org = this.getOrganizationText(option);
+        browser.pause(2000);
+        waitUntil(() => this.inputTextBox.isExisting(), Timeouts.FORTY_SECONDS, 'input text box Organization button was not displaying');
+        this.inputTextBox.setValue(option);
+        const org = this.getDropdownOptionText(option);
         org.click();
     }
 
-    public getOrganizationText(text) {
-        const elements = this.organizationlist;
+    public getDropdownOptionText(text) {
+        const elements = this.dropdowns;
         const itemByText = elements.find((item) => {
-            const itemByTexts = item.getText().trim();
-            return itemByTexts === `${text}`;
+            const itemByTexts = item.getAttribute('data-cy');
+            const options = itemByTexts.includes(text);
+            return options;
         });
         if (itemByText === undefined) {
             throw new Error(`Can't find list item by name ${text}`);
@@ -216,7 +222,7 @@ export class IncriptionPage extends BasePage {
     public selectOpenApiType(option: string) {
         waitUntil(() => this.openApi.isExisting(), Timeouts.FORTY_SECONDS, 'Open API dropdown was not displaying');
         this.openApi.click();
-        const org = this.getOrganizationText(option);
+        const org = this.getDropdownOptionText(option);
         org.click();
     }
 
@@ -241,8 +247,20 @@ export class IncriptionPage extends BasePage {
     public selectDirectAccessType(option: string) {
         waitUntil(() => this.directAccess.isExisting(), Timeouts.FORTY_SECONDS, 'Direct access dropdown was not displaying');
         this.directAccess.click();
-        const org = this.getOrganizationText(option);
+        const org = this.getDirectDropdownOptionText(option);
         org.click();
+    }
+
+    public getDirectDropdownOptionText(text) {
+        const elements = this.dropdowns;
+        const itemByText = elements.find((item) => {
+            const itemByTexts = item.getText().trim();
+            return itemByTexts === `${text}`
+        });
+        if (itemByText === undefined) {
+            throw new Error(`Can't find list item by name ${text}`);
+        }
+        return itemByText;
     }
 
     /**

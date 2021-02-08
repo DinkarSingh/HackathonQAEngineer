@@ -33,10 +33,11 @@ describe('Transaction Connect FRONT-END CHALLENGE', () => {
         const mobile = '0628' + Math.floor((Math.random() * 1000000) + 1);
         const email = 'mailmedinkar' + randomNum + '@gmail.com';
         const identification = '1234' + randomNum;
+        const ss = '1234' + randomNum;
         TestBuildingBlocks.addStepAndExecute(`Verfy that home page is displaying`, () => {
             expect(homePage.isHomePageLoaded()).to.eq(true, 'Home page was not displaying');
         });
-        TestBuildingBlocks.addStepAndExecute(`Click on Join the Program button`, () => {
+        TestBuildingBlocks.addStepAndExecute(`Click on login in button`, () => {
             homePage.clickOnLoginInButton();
             expect(incriptionPage.isPageTitleExistingDisplaying()).to.eq(true, 'Registration page title was not displaying');
         });
