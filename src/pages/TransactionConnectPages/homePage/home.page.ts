@@ -6,7 +6,7 @@ export class HomePage extends BasePage {
 
     private get loginButton() { return $('[data-cy="landing_page_connect_btn"]') }
 
-    private get joinProgram() { return $('[data-cy="landing_page_subscribe_btn"]') }
+    private get withoutAccount() { return $('[data-cy="connection_inscription_link"]') }
 
     /**
      * checking home is loeaded or not
@@ -16,12 +16,14 @@ export class HomePage extends BasePage {
     }
 
     /**
-     * here click on join the program buttton on home page
+     * here click on login button and then I do not have account button accssing
      */
-    public clickOnJoinProgramButton() {
-        waitUntil(() => this.joinProgram.isExisting(), Timeouts.FORTY_SECONDS, 'Join the program button was not displaying');
+    public clickOnLoginInButton() {
+        waitUntil(() => this.loginButton.isExisting(), Timeouts.FORTY_SECONDS, 'Login in button was not displaying');
         browser.pause(3000);
-        this.joinProgram.click();
+        this.loginButton.click();
+        waitUntil(() => this.withoutAccount.isExisting(), Timeouts.FORTY_SECONDS, 'Do not have account button was not displaying');
+        this.withoutAccount.click();
     }
 
 }

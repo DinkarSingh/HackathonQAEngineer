@@ -32,16 +32,12 @@ describe('Transaction Connect FRONT-END CHALLENGE', () => {
         const lastName = 'Singh' + randomNum;
         const mobile = '0628' + Math.floor((Math.random() * 1000000) + 1);
         const email = 'mailmedinkar' + randomNum + '@gmail.com';
-        const purchasesTitle = 'How do you wish to tell us about your purchases?';
-        const unlockOffersTitle = 'Link your bank account to unlock offers';
-        const compatibleTitle = 'Your bank is compatible';
-        const purchasesType = 'Automatically';
         const identification = '1234' + randomNum;
         TestBuildingBlocks.addStepAndExecute(`Verfy that home page is displaying`, () => {
             expect(homePage.isHomePageLoaded()).to.eq(true, 'Home page was not displaying');
         });
         TestBuildingBlocks.addStepAndExecute(`Click on Join the Program button`, () => {
-            homePage.clickOnJoinProgramButton();
+            homePage.clickOnLoginInButton();
             expect(incriptionPage.isPageTitleExistingDisplaying()).to.eq(true, 'Registration page title was not displaying');
         });
         TestBuildingBlocks.addStepAndExecute(`Verfy that Transaction Connect registration page is displaying`, () => {
@@ -66,18 +62,18 @@ describe('Transaction Connect FRONT-END CHALLENGE', () => {
                 incriptionPage.clickOnMyAccountButton();
             });
             TestBuildingBlocks.addStepAndExecute(`Check that purchases title text is displaying or not`, () => {
-                expect(incriptionPage.getUnlockOffersText()).to.equal(purchasesTitle, `${purchasesTitle} title was not displaying`);
+                expect(incriptionPage.isUnlockOffersTextDisplaying()).to.equal(true, `Purchases title was not displaying`);
             });
         });
         TestBuildingBlocks.addStepAndExecute(`Purchase type selection steps`, () => {
-            TestBuildingBlocks.addStepAndExecute(`Verify that purchases type as ${purchasesType} is displaying`, () => {
-                expect(incriptionPage.checkPuchasesType(purchasesType)).to.equal(true, `Purchases type ${purchasesType} was not displaying`);
+            TestBuildingBlocks.addStepAndExecute(`Verify that purchases type as Automatically is displaying`, () => {
+                expect(incriptionPage.checkPuchasesType()).to.equal(true, `Purchases type Automatically option was not displaying`);
             });
-            TestBuildingBlocks.addStepAndExecute(`Click on puchases type ${purchasesType} button`, () => {
+            TestBuildingBlocks.addStepAndExecute(`Click on puchases type as Automatically button`, () => {
                 incriptionPage.clickOnPurchasesTypeButton();
             });
             TestBuildingBlocks.addStepAndExecute(`Verify that unclock offers title was displaying or not`, () => {
-                expect(incriptionPage.getPurchasesTitleText()).to.equal(unlockOffersTitle, `${unlockOffersTitle} title was not displaying`);
+                expect(incriptionPage.isPurchasesTitleTextExisting()).to.equal(true, `Unlock offers title was not displaying`);
             });
         });
         TestBuildingBlocks.addStepAndExecute(`Bank account to unlock offers steps`, () => {
@@ -86,7 +82,7 @@ describe('Transaction Connect FRONT-END CHALLENGE', () => {
                 expect(incriptionPage.isOrganizationTextValueExisting('Connecteur de test')).to.equal(true, `Organization value was not selected`);
             });
             TestBuildingBlocks.addStepAndExecute(`Verify that compatible title was displaying or not`, () => {
-                expect(incriptionPage.getCompatibleTitleText()).to.equal(compatibleTitle, `${compatibleTitle} title was not displaying`);
+                expect(incriptionPage.isCompatibleTitleTextExisting()).to.equal(true, `Account to unlock offers title was not displaying`);
             });
             TestBuildingBlocks.addStepAndExecute(`Select the open API from the dropdown list`, () => {
                 incriptionPage.selectOpenApiType('Particuliers');

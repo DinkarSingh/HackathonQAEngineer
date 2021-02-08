@@ -54,7 +54,11 @@ export class IncriptionPage extends BasePage {
      * Transaction Connect registration page existing or not
      */
     public isPageTitleExistingDisplaying(): boolean {
-        return waitUntil(() => this.pageTitle.isExisting(), Timeouts.FORTY_SECONDS, 'Transaction Connect registration page was not displaying');
+        waitUntil(() => this.pageTitle.isExisting(), Timeouts.FORTY_SECONDS, 'Transaction Connect registration page was not displaying');
+        const title = this.pageTitle.getText();
+        if(title !== null){
+            return true;
+        }
     }
 
     /**
@@ -113,11 +117,14 @@ export class IncriptionPage extends BasePage {
     }
 
     /**
-     * returning the purchases title text
+     * checking the purchases title text existing and displaying
      */
-    public getPurchasesTitleText(): string {
+    public isPurchasesTitleTextExisting(): boolean {
         waitUntil(() => this.purchasesTitle.isExisting(), Timeouts.FORTY_SECONDS, 'Purchases title was not displaying');
-        return this.purchasesTitle.getText().trim();
+        const title = this.purchasesTitle.getText().trim();
+        if(title !== null){
+            return true
+        }
     }
 
     /**
@@ -125,10 +132,10 @@ export class IncriptionPage extends BasePage {
      * @param type 
      * retuning the purchase type text
      */
-    public checkPuchasesType(type: string): boolean {
+    public checkPuchasesType(): boolean {
         waitUntil(() => this.purchaseType[0].isExisting(), Timeouts.FORTY_SECONDS, 'Purchases type was not displaying');
         const typeOfPurchase = this.purchaseType[0].getText().trim();
-        if (typeOfPurchase === type) {
+        if (typeOfPurchase !== null) {
             return true;
         }
     }
@@ -144,10 +151,13 @@ export class IncriptionPage extends BasePage {
     /**
      * Unlock offers title text
      */
-    public getUnlockOffersText(): string {
+    public isUnlockOffersTextDisplaying(): boolean {
         browser.pause(3000);
         waitUntil(() => this.unlockOfferTitle.isExisting(), Timeouts.FORTY_SECONDS, 'Unlock offers title was not displaying');
-        return this.unlockOfferTitle.getText().trim();
+        const title = this.unlockOfferTitle.getText().trim();
+        if(title !== null){
+            return true;
+        }
     }
 
     /**
@@ -190,9 +200,12 @@ export class IncriptionPage extends BasePage {
     /**
      * returning the compatible title text
      */
-    public getCompatibleTitleText(): string {
+    public isCompatibleTitleTextExisting(): boolean {
         waitUntil(() => this.compatibleTitle.isExisting(), Timeouts.FORTY_SECONDS, 'Compatible title was not displaying');
-        return this.compatibleTitle.getText().trim();
+        const title = this.compatibleTitle.getText().trim();
+        if(title !== null){
+            return true;
+        }
     }
 
     /**
