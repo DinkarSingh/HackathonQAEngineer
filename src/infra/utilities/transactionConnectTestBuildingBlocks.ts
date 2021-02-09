@@ -1,8 +1,8 @@
 import { Timeouts } from '../enum/timeouts';
 import { waitUntil } from '../waiter/wait';
 import { TestBuildingBlocks } from "./testBuildingBlock";
-import { HomePage } from '../../../src/pages/TransactionConnectPages/homePage/home.page';
-import { IncriptionPage } from '../../../src/pages/TransactionConnectPages/transactionConnect/incription.page';
+import { HomePage } from '../../pages/TransactionConnectPages/homePage/home.page';
+import { IncriptionPage } from '../../pages/TransactionConnectPages/transactionConnect/incription.page';
 
 export class TransactionConnectTestBuildingBlocks extends TestBuildingBlocks {
 

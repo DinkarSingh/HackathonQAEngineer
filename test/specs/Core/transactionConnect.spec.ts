@@ -3,7 +3,7 @@ import { TestBuildingBlocks } from '../../../src/infra/utilities/testBuildingBlo
 import { TestLogger } from '../../../src/infra/loggers/test-logger';
 import { HomePage } from '../../../src/pages/TransactionConnectPages/homePage/home.page';
 import { BaseTestData } from "../../../src/infra/models/base-test-data";
-import { TransactionConnectTestBuildingBlocks } from '../../../src/infra/utilities/test-BuildingBlock';
+import { TransactionConnectTestBuildingBlocks } from '../../../src/infra/utilities/transactionConnectTestBuildingBlocks';
 
 let homePage = new HomePage();
 let logger: TestLogger;
