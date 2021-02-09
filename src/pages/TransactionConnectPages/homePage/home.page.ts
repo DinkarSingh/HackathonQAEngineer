@@ -1,6 +1,7 @@
 import { Timeouts } from '../../../infra/enum/timeouts';
 import { waitUntil } from '../../../infra/waiter/wait';
 import { BasePage } from '../base-Page';
+import { IncriptionPage } from '../../TransactionConnectPages/transactionConnect/incription.page';
 
 export class HomePage extends BasePage {
 
@@ -18,12 +19,15 @@ export class HomePage extends BasePage {
     /**
      * here click on login button and then I do not have account button accssing
      */
-    public clickOnLoginInButton() {
+    public clickOnLoginInButton(): IncriptionPage {
         waitUntil(() => this.loginButton.isExisting(), Timeouts.FORTY_SECONDS, 'Login in button was not displaying');
         browser.pause(3000);
         this.loginButton.click();
         waitUntil(() => this.withoutAccount.isExisting(), Timeouts.FORTY_SECONDS, 'Do not have account button was not displaying');
         this.withoutAccount.click();
+        const page = new IncriptionPage();
+        waitUntil(() => page.isPageTitleExistingDisplaying(), Timeouts.TEN_SECONDS, 'Detail page is not loaded');
+        return page;
     }
 
 }

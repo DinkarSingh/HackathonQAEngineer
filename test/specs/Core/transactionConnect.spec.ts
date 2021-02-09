@@ -2,12 +2,10 @@ import { expect } from 'chai';
 import { TestBuildingBlocks } from '../../../src/infra/utilities/testBuildingBlock';
 import { TestLogger } from '../../../src/infra/loggers/test-logger';
 import { HomePage } from '../../../src/pages/TransactionConnectPages/homePage/home.page';
-import { IncriptionPage } from '../../../src/pages/TransactionConnectPages/transactionConnect/incription.page';
 import { BaseTestData } from "../../../src/infra/models/base-test-data";
 import { TransactionConnectTestBuildingBlocks } from '../../../src/infra/utilities/test-BuildingBlock';
 
 let homePage = new HomePage();
-let incriptionPage = new IncriptionPage();
 let logger: TestLogger;
 let testIndex = 0;
 let testData: BaseTestData = new BaseTestData(undefined);
@@ -37,13 +35,9 @@ describe('Transaction Connect FRONT-END CHALLENGE', () => {
         TestBuildingBlocks.addStepAndExecute(`Verfy that home page is displaying`, () => {
             expect(homePage.isHomePageLoaded()).to.eq(true, 'Home page was not displaying');
         });
-        TestBuildingBlocks.addStepAndExecute(`Click on login in button`, () => {
-            homePage.clickOnLoginInButton();
+        const incriptionPage = homePage.clickOnLoginInButton();
+        TestBuildingBlocks.addStepAndExecute(`Verify registration page existing`, () => {
             expect(incriptionPage.isPageTitleExistingDisplaying()).to.eq(true, 'Registration page title was not displaying');
-        });
-        TestBuildingBlocks.addStepAndExecute(`Verfy that Transaction Connect registration page is displaying`, () => {
-            const pageURL = browser.getUrl();
-            expect(pageURL).to.contain('creation-identifiant', `URL not found as ${pageURL}`);
         });
         TestBuildingBlocks.addStepAndExecute(`Create your identification with following fields`, () => {
             TestBuildingBlocks.addStepAndExecute(`Enter the user First name as ${firstName}`, () => {
