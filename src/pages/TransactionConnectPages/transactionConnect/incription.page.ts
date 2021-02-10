@@ -1,6 +1,7 @@
 import { Timeouts } from '../../../infra/enum/timeouts';
 import { waitUntil } from '../../../infra/waiter/wait';
 import { BasePage } from '../base-Page';
+import { OptionFinder} from '../../../infra/utilities/optionFinder'
 
 export class IncriptionPage extends BasePage {
 
@@ -183,21 +184,9 @@ export class IncriptionPage extends BasePage {
         browser.pause(2000);
         waitUntil(() => this.inputTextBox.isExisting(), Timeouts.FORTY_SECONDS, 'input text box Organization button was not displaying');
         this.inputTextBox.setValue(option);
-        const org = this.getDropdownOptionText(option);
-        org.click();
-    }
-
-    public getDropdownOptionText(text) {
-        const elements = this.dropdowns;
-        const itemByText = elements.find((item) => {
-            const itemByTexts = item.getAttribute('data-cy');
-            const options = itemByTexts.includes(text);
-            return options;
-        });
-        if (itemByText === undefined) {
-            throw new Error(`Can't find list item by name ${text}`);
-        }
-        return itemByText;
+        const elements = this.getMultioptionalCheck();
+        const foundElement = elements.getDropdownOptionText(option)
+        foundElement.click();
     }
 
     /**
@@ -232,8 +221,9 @@ export class IncriptionPage extends BasePage {
     public selectOpenApiType(option: string) {
         waitUntil(() => this.openApi.isExisting(), Timeouts.FORTY_SECONDS, 'Open API dropdown was not displaying');
         this.openApi.click();
-        const org = this.getDropdownOptionText(option);
-        org.click();
+        const elements = this.getMultioptionalCheck();
+        const foundElement = elements.getDropdownOptionText(option)
+        foundElement.click();
     }
 
     /**
@@ -257,21 +247,15 @@ export class IncriptionPage extends BasePage {
     public selectDirectAccessType(option: string) {
         waitUntil(() => this.directAccess.isExisting(), Timeouts.FORTY_SECONDS, 'Direct access dropdown was not displaying');
         this.directAccess.click();
-        const org = this.getDirectDropdownOptionText(option);
-        org.click();
+        const elements = this.getMultioptionalCheck();
+        const foundElement = elements.getTextSearch(option)
+        foundElement.click();
     }
 
-    public getDirectDropdownOptionText(text) {
-        const elements = this.dropdowns;
-        const itemByText = elements.find((item) => {
-            const itemByTexts = item.getText().trim();
-            return itemByTexts === `${text}`
-        });
-        if (itemByText === undefined) {
-            throw new Error(`Can't find list item by name ${text}`);
-        }
-        return itemByText;
-    }
+    public getMultioptionalCheck(): OptionFinder {
+        const options = this.dropdowns;
+        return new OptionFinder(options);
+      }
 
     /**
      * 
