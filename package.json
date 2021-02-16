@@ -6,6 +6,7 @@
   "scripts": {
     "TransactionConnect": "ENV=preprod wdio ./wdio.conf.js --spec ./test/specs/Core/transactionConnect.spec.ts",
     "TransactionConnectHeadless": "cross-env ENV=preprod HEADLESS=true wdio wdio.conf.js --spec ./test/specs/Core/transactionConnect.spec.ts",
+    "apiCall": "mocha -r ts-node/register ./test/specs/Core/apiTest.spec.ts",
     "report": "allure generate allure-results/ --clean && allure open"
   },
   "keywords": [],
@@ -35,6 +36,17 @@
     "wdio-json-reporter": "^0.4.0"
   },
   "dependencies": {
+    "@angular/animations": "6.0.3",
+    "@angular/common": "6.0.3",
+    "@angular/compiler": "6.0.3",
+    "@angular/compiler-cli": "6.0.3",
+    "@angular/core": "6.0.3",
+    "@angular/forms": "6.0.3",
+    "@angular/http": "6.0.3",
+    "@angular/platform-browser": "6.0.3",
+    "@angular/platform-browser-dynamic": "6.0.3",
+    "@angular/platform-server": "6.0.3",
+    "@angular/router": "6.0.3",
     "@types/chai": "^4.2.14",
     "@types/chai-http": "^4.2.0",
     "@types/mocha": "^8.0.3",
