@@ -60,9 +60,11 @@ describe("POST /api/tasks", () => {
             .set('accept-language', 'en-GB,en-US;q=0.9,en;q=0.8')
             .send(obj)
             .end((err, response) => {
-                console.log(response);
+                console.log(response.status);
+                /*console.log(response);
+                response.write(response.statusCode.toString());
                 response.should.have.status(200);
-                done();
+                done();*/
             });
     });
 });
