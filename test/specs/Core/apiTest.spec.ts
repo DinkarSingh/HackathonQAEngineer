@@ -34,6 +34,7 @@ describe("POST /api/tasks", () => {
                 const id = response.body.customerId;
                 userId = id;
                 console.log(userId);
+                
                 // response.body.should.be.a('object');
                 // response.body.should.have.property('id').eq(4);
                 // response.body.should.have.property('name').eq("Task 4");
