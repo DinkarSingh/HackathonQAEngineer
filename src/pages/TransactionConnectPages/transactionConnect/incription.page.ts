@@ -1,7 +1,7 @@
 import { Timeouts } from '../../../infra/enum/timeouts';
 import { waitUntil } from '../../../infra/waiter/wait';
 import { BasePage } from '../base-Page';
-import { OptionFinder} from '../../../infra/utilities/optionFinder'
+import { OptionFinder } from '../../../infra/utilities/optionFinder'
 
 export class IncriptionPage extends BasePage {
 
@@ -255,7 +255,7 @@ export class IncriptionPage extends BasePage {
     public getMultioptionalCheck(): OptionFinder {
         const options = this.dropdowns;
         return new OptionFinder(options);
-      }
+    }
 
     /**
      * 
